@@ -1,0 +1,63 @@
+<?php
+
+/**
+ * @file
+ * Contains hook implementations for the Ascend Helper module.
+ */
+
+declare(strict_types=1);
+
+use Drupal\ascend_helper\Hook\HelperHooks;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Hook\LegacyHook;
+
+/**
+ * Legacy hook implementation.
+ *
+ * @todo Remove this method when support for Drupal core < 11.1 is dropped.
+ */
+#[LegacyHook]
+function ascend_helper_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  \Drupal::service(HelperHooks::class)->formAlter($form, $form_state, $form_id);
+}
+
+/**
+ * Legacy hook implementation.
+ *
+ * @todo Remove this method when support for Drupal core < 11.1 is dropped.
+ */
+#[LegacyHook]
+function ascend_helper_taxonomy_term_presave(EntityInterface $entity) {
+  \Drupal::service(HelperHooks::class)->taxonomyTermPresave($entity);
+}
+
+/**
+ * Legacy hook implementation.
+ *
+ * @todo Remove this method when support for Drupal core < 11.1 is dropped.
+ */
+#[LegacyHook]
+function ascend_helper_form_taxonomy_term_category_edit_info_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  \Drupal::service(HelperHooks::class)->formTaxonomyTermCategoryEditInfoFormAlter($form, $form_state, $form_id);
+}
+
+/**
+ * Legacy hook implementation.
+ *
+ * @todo Remove this method when support for Drupal core < 11.1 is dropped.
+ */
+#[LegacyHook]
+function ascend_helper_page_attachments(array &$attachments) {
+  \Drupal::service(HelperHooks::class)->pageAttachments($attachments);
+}
+
+/**
+ * Legacy hook implementation.
+ *
+ * @todo Remove this method when support for Drupal core < 11.1 is dropped.
+ */
+#[LegacyHook]
+function ascend_resource_auto_username_alter(array &$data) {
+  \Drupal::service(ResourceHooks::class)->autoUsernameAlter($data);
+}

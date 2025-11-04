@@ -1,0 +1,5 @@
+name: Ascend Helper
+type: module
+description: General helper module for basic tasks that span both branches of Ascend
+package: Ascend
+core_version_requirement: ^10 || ^11
