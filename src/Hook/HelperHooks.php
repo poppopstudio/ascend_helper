@@ -20,8 +20,18 @@ class HelperHooks {
   #[Hook('form_alter')]
   public function formAlter(&$form, FormStateInterface $form_state, $form_id) {
     // \Drupal::messenger()->addMessage(t("Form ID: @fid", ['@fid' => $form_id]));
-    return;
   }
+
+
+  /**
+   * Implements hook_form_alter().
+   */
+  #[Hook('form_taxonomy_overview_terms_alter')]
+  public function formTaxonomyOverviewTermsAlter(&$form, FormStateInterface $form_state, $form_id) {
+    // Term order is paramount, ergo this option is toxic, remove it.
+    unset($form['actions']['reset_alphabetical']);
+  }
+
 
   /**
    * Implements hook_tokens_alter().
@@ -38,6 +48,7 @@ class HelperHooks {
       }
     }
   }
+
 
   /**
    * Implements hook_ENTITY_TYPE_presave().
@@ -57,6 +68,7 @@ class HelperHooks {
     }
   }
 
+
   /**
    * Implements hook_form_FORM_ID_alter().
    */
@@ -64,8 +76,8 @@ class HelperHooks {
   public function formTaxonomyTermCategoryEditInfoFormAlter(&$form, FormStateInterface $form_state, $form_id) {
     // Hide term 'relations' element; don't allow alterations in this form mode.
     $form['relations']['#access'] = FALSE;
-    return;
   }
+
 
   /**
    * Implements hook_page_attachments().
@@ -83,6 +95,7 @@ class HelperHooks {
       // $attachments['#attached']['library'][] = 'your_module/your_library';
     }
   }
+
 
   /**
    * Implements hook_auto_username_alter().
