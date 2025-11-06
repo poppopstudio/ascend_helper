@@ -58,6 +58,6 @@ function ascend_helper_page_attachments(array &$attachments) {
  * @todo Remove this method when support for Drupal core < 11.1 is dropped.
  */
 #[LegacyHook]
-function ascend_resource_auto_username_alter(array &$data) {
+function ascend_helper_auto_username_alter(array &$data) {
   \Drupal::service(HelperHooks::class)->autoUsernameAlter($data);
 }
