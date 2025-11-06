@@ -84,15 +84,14 @@ class HelperHooks {
    */
   #[Hook('page_attachments')]
   public function pageAttachments(array &$attachments) {
-    // Attach a CSS library to overwrite Gin styles.
-    // Assumes the default theme has the library.
-    // get the default theme.
-    // $theme = \Drupal::config('system.theme')->get('default');
-    // see ckeditor5.module
-
-    // Attach the library if the active route is an admin one.
+    /**
+     * Attach a CSS library to overwrite Gin theme styles on admin routes.
+     * Assumes the default theme contains the necessary library.
+     */
     if (\Drupal::service('router.admin_context')->isAdminRoute()) {
-      // $attachments['#attached']['library'][] = 'your_module/your_library';
+      // Get the default (frontend) theme (ref. ckeditor5.module:587+).
+      $default_theme = \Drupal::config('system.theme')->get('default');
+      $attachments['#attached']['library'][] = "$default_theme/gin_overrides";
     }
   }
 
