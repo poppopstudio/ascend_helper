@@ -1,7 +1,7 @@
 # Ascend Helper
 
-TODO: write some documentation.
+Provides helper code for the Ascend project.
 
 ## Requirements
 
-This module requires no modules outside of Drupal core.
+This module forms part of the Ascend suite of modules from PopPop.Studio
