@@ -8,6 +8,7 @@ use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Hook\Attribute\Hook;
 use Drupal\Core\Render\BubbleableMetadata;
+// use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Contains hook implementations for the Ascend Helper module.
@@ -80,6 +81,16 @@ class HelperHooks {
 
 
   /**
+   * Implements hook_auto_username_alter().
+   */
+  #[Hook('auto_username_alter')]
+  public function autoUsernameAlter(array &$data): void {
+    // Force usernames to be all lower case.
+    // $data['username'] = strtolower($data['username']);
+  }
+
+
+  /**
    * Implements hook_page_attachments().
    */
   #[Hook('page_attachments')]
@@ -97,11 +108,39 @@ class HelperHooks {
 
 
   /**
-   * Implements hook_auto_username_alter().
+   * Implements hook_page_attachments().
+   *
+   * Add a JS snippet to send search terms to Plausible.
    */
-  #[Hook('auto_username_alter')]
-  public function autoUsernameAlter(array &$data): void {
-    // Force usernames to be all lower case.
-    // $data['username'] = strtolower($data['username']);
-  }
+  // #[Hook('page_attachments_alter')]
+  // public function pageAttachmentsAlter(&$attachments) {
+
+  //   if (!\Drupal::moduleHandler()->moduleExists('plausible')) {
+  //     return;
+  //   }
+
+  //   // Only track searches from anon users - module should(?) handle this; nope.
+  //   if (\Drupal::currentUser()->isAuthenticated()) {
+  //     return;
+  //   }
+
+  //   $request = \Drupal::requestStack()->getCurrentRequest();
+  //   $search_term = $request->query->get('s');
+
+  //   # Change the path if it's not 'search'.
+  //   if ($request instanceof Request && $request->getPathInfo() === '/search' && isset($search_term)) {
+
+  //     // Replace (white)spaces with + as per Plausible docs.
+  //     $term = preg_replace('/\s+/', '+', $search_term);
+
+  //     $attachments['#attached']['html_head'][] = [
+  //       [
+  //         '#tag' => 'script',
+  //         '#value' => "plausible('Search', { props: { term: $search_term } });",
+  //       ],
+  //       'plausible_tracking_snippet_event_search',
+  //     ];
+  //   }
+  // }
+
 }

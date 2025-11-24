@@ -71,3 +71,14 @@ function ascend_helper_page_attachments(array &$attachments) {
 function ascend_helper_auto_username_alter(array &$data) {
   \Drupal::service(HelperHooks::class)->autoUsernameAlter($data);
 }
+
+
+/**
+ * Legacy hook implementation.
+ *
+ * @todo Remove this method when support for Drupal core < 11.1 is dropped.
+ */
+// #[LegacyHook]
+// function ascend_helper_page_attachments_alter(array &$attachments) {
+//   \Drupal::service(HelperHooks::class)->pageAttachmentsAlter($attachments);
+// }
